@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社アイタス_IT Apex Solotion</title>
+    <meta name="description" content="株式会社アイタス,システム開発実績,作業受託,アプリ開発,コンサルティング,新卒採用,経験者採用">
+    <meta name="keywords" content="株式会社アイタス,システム開発実績,作業受託,アプリ開発,コンサルティング,新卒採用,経験者採用">
+    <link rel="icon" href="https://www.itas.co.jp/images/favicon.png" type="image/png">
+    
+    <!-- 外部CSS和字体 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- 外部JavaScript库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <!-- 動的パーティクル背景 -->
+    <canvas id="particles-canvas"></canvas>
+    
+    <!-- 浮遊光効果要素 -->
+    <div class="floating-elements"></div>
+
+    <!-- ページコンテナ -->
+    <div class="container">
+        <!-- ヘッダーナビゲーション -->
+        <header>
+            <div class="logo">
+                <img src="images/logo.jpg" alt="株式会社アイタス" class="company-logo">
+                <div class="logo-text"> 
+                    <div>株式会社アイタス</div> 
+                    <div class="logo-subtitle"></div>
+                </div>
+            </div>
+            
+            <!-- メインナビゲーション -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#company-info">企業情報</a></li> <!-- 修改这里 -->
+                    <li><a href="#work-contract">事業紹介</a></li>
+                    <li><a href="#corporate-history">アイタス発展の軌跡</a></li>
+                    <li><a href="#recruitment">採用情報</a></li>
+                </ul>
+            </nav>
+            
+            <!-- テーマ切替ボタン -->
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </button>
+        </header>
+
+        <!-- ヒーローセクション -->
+        <section id="company-info" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-part">株式会社アイタス</span>
+                    <span class="title-part highlight">コアビジネス領域</span>
+                </h1>
+                <p class="hero-description">
+                    伝統の匠の精神と現代のデジタル技術を融合させ、株式会社アイタスは高精度・高信頼性の技術革新に特化し、世界のデジタル化プロセスを支える堅実な基盤を提供します。
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number" data-target="7">0</div>
+                        <div class="stat-label">年の技術蓄積</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" data-target="30">0</div>
+                        <div class="stat-label">世界のパートナー</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" data-target="1500000">0</div>
+                        <div class="stat-label">（员工数 分社 累计业务实绩  成长率）</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技術カードグリッド -->
+        <main class="tech-grid" id="techGrid">
+            <!-- カードはJavaScriptで動的に生成されます -->
+        </main>
+        
+        <!-- アイタスの軌跡セクション -->
+        <section id="corporate-history" class="timeline-section">
+            <h2>アイタス発展の軌跡</h2>
+            <div class="timeline">
+                <div class="timeline-item" data-year="2019">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>創業・起業</h3>
+                        <p>アイタス株式会社設立。福岡県内に本社を構え、企業向けシステム開発を主業務として事業を開始</p>
+                        <ul class="timeline-features">
+                            <li><i class="fas fa-check"></i> 初年度従業員5名でスタート</li>
+                            <li><i class="fas fa-check"></i> ECサイトシステムの開発で実績を築く（假设 文案待定）</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2001">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>事業拡大期</h3>
+                        <p>モバイルソリューション事業部を新設。国内企業向けモバイルアプリケーション開発に特化</p>
+                        <ul class="timeline-features">
+                            <li><i class="fas fa-check"></i> 東京に支社開設（假设 文案待定）</li>
+                            <li><i class="fas fa-check"></i> ISO 27001認証取得（假设 文案待定）</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2023">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>DX推進リーダーへ</h3>
+                        <p>コロナ禍における企業のデジタルトランスフォーメーション需要に対応。リモートワークソリューションを提供</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2025">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>未来に向けた挑戦</h3>
+                        <p>次世代技術の社会実装を目指す</p>
+                        <ul class="timeline-features">
+                            <li><i class="fas fa-check"></i> 若手技術者育成プログラム（假设 文案待定）</li>
+                            <li><i class="fas fa-check"></i> オープンイノベーション推進、スタートアップとの連携強化（假设 文案待定）</li>
+                            <li><i class="fas fa-check"></i> 持続可能なデジタル社会の実現へ（假设 文案待定）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 採用情報セクション -->
+        <section id="recruitment" class="recruitment-section">
+            <div class="section-header">
+                <h2>採用情報</h2>
+                <p class="section-subtitle">私たちと一緒に未来を創りませんか？</p>
+            </div>
+            
+            <div class="recruitment-cards">
+                <!-- 新卒採用カード -->
+                <div class="recruitment-card to-animate"> <!-- 添加了 to-animate -->
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>新卒採用</h3>
+                        <span class="position">New Graduate</span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="recruitment-list">
+                            <li><i class="fas fa-briefcase"></i> <strong>募集職種：</strong>正社員(ＳＥ・プログラマー)</li>
+                            <li><i class="fas fa-user-graduate"></i> <strong>資格：</strong>新卒・既卒3年以内の方</li>
+                            <li><i class="fas fa-yen-sign"></i> <strong>待遇：</strong>(大卒)230,000円～</li>
+                            <li class="indent">(短大・専門学校卒)210,000円～</li>
+                            <li><i class="fas fa-calendar-alt"></i> <strong>休日休暇：</strong>週休2日制、夏期休暇、年末年始休暇、有給休日</li>
+                            <li><i class="fas fa-shield-alt"></i> <strong>福利厚生：</strong>各種社会保険完備</li>
+                            <li><i class="fas fa-map-marker-alt"></i> <strong>勤務地：</strong>関東・九州</li>
+                            <li><i class="fas fa-clock"></i> <strong>勤務時間：</strong>9：00～18：00</li>
+                        </ul>
+                        <div class="application-info">
+                            <h4><i class="fas fa-paper-plane"></i> 応募方法</h4>
+                            <p>履歴書（希望職種・希望勤務地明記、写真貼付）および職務経歴書（書式自由）をご郵送願います
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 経験者採用カード -->
+                <div class="recruitment-card to-animate"> <!-- 添加了 to-animate -->
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>経験者採用</h3>
+                        <span class="position">Experienced</span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="recruitment-list">
+                            <li><i class="fas fa-briefcase"></i> <strong>募集職種：</strong>Web系／組み込み系ＳＥ、ＰＧ</li>
+                            <li><i class="fas fa-yen-sign"></i> <strong>待遇：</strong>経験・年齢・能力を考慮の上、当社規定により優遇いたします</li>
+                            <li><i class="fas fa-hand-holding-usd"></i> <strong>諸手当：</strong>資格手当、扶養手当、時間外勤務手当、通勤手当</li>
+                            <li><i class="fas fa-calendar-alt"></i> <strong>休日休暇：</strong>週休2日制、夏期休暇、年末年始休暇、有給休日</li>
+                            <li><i class="fas fa-shield-alt"></i> <strong>福利厚生：</strong>各種社会保険完備</li>
+                            <li><i class="fas fa-map-marker-alt"></i> <strong>勤務地：</strong>関東・九州</li>
+                            <li><i class="fas fa-clock"></i> <strong>勤務時間：</strong>9：00～18：00</li>
+                        </ul>
+                        <div class="application-info">
+                            <h4><i class="fas fa-paper-plane"></i> 応募方法</h4>
+                            <p>履歴書（希望職種・希望勤務地明記、写真貼付）および職務経歴書（書式自由）をご郵送願います
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- フッター -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-microchip"></i>
+                    <span>株式会社アイタス</span>
+                </div>
+                <p class="footer-slogan">伝統と革新を融合し、デジタルの未来を形作る</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <p class="copyright">© 2025 株式会社アイタス. 全著作権所有。</p>
+        </footer>
+    </div>
+
+    <!-- 外部JavaScriptファイル -->
+    <script src="js/data.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

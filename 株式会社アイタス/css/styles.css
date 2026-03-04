@@ -1,0 +1,795 @@
+/* ベーススタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+}
+
+:root {
+    --primary-color: #0066cc;
+    --secondary-color: #00b4d8;
+    --accent-color: #7209b7;
+    --dark-bg: #0a192f;
+    --light-bg: #f8f9fa;
+    --text-light: #e6f1ff;
+    --text-dark: #172a45;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --transition-speed: 0.4s;
+}
+
+body {
+    background: var(--dark-bg);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ヘッダー */
+header {
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(10, 25, 47, 0.8);
+    transition: all var(--transition-speed);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+
+.logo-text {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+
+.company-logo {
+    width: 40px;      
+    height: auto;     
+    border-radius: 8px; 
+}
+
+@keyframes glow {
+    0% { filter: drop-shadow(0 0 5px rgba(0, 102, 204, 0.5)); }
+    100% { filter: drop-shadow(0 0 15px rgba(0, 180, 216, 0.8)); }
+}
+
+/* メインナビゲーション */
+.main-nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center; 
+}
+
+.main-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    line-height: 1.2;
+}
+
+.main-nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0.1rem; 
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    opacity: 0; 
+}
+
+.main-nav a:hover::before {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.main-nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--secondary-color);
+}
+
+/* テーマ切替ボタン */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--secondary-color);
+    color: var(--text-light);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--secondary-color);
+    transform: rotate(30deg);
+}
+
+.theme-toggle .fa-sun {
+    display: none;
+}
+
+/* ヒーローセクション */
+.hero {
+    text-align: center;
+    padding: 8rem 0 10rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
+    background: radial-gradient(circle, rgba(0, 180, 216, 0.1) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.hero-title {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.title-part {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.highlight {
+    background: linear-gradient(90deg, #00b4d8, #7209b7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 4.5rem;
+}
+
+.hero-description {
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    color: #a8b2d1;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    opacity: 0;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: #8a9bb8;
+    margin-top: 0.5rem;
+}
+
+/* 技術カードグリッド */
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 6rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    cursor: pointer;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.7s ease;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
+    border-color: rgba(0, 180, 216, 0.3);
+}
+
+.card.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-icon {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.card p {
+    color: #a8b2d1;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.features {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.features li {
+    padding: 0.6rem 0;
+    color: #8a9bb8;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.features li:hover {
+    color: var(--secondary-color);
+    transform: translateX(10px);
+}
+
+.features li:last-child {
+    border-bottom: none;
+}
+
+.features li i {
+    color: var(--secondary-color);
+    margin-right: 10px;
+    font-size: 0.9rem;
+}
+
+/* タイムラインセクション */
+.timeline-section {
+    margin: 6rem 0;
+    padding: 4rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.timeline-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    background: linear-gradient(90deg, #00b4d8, #7209b7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--secondary-color), var(--accent-color));
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 4rem;
+    width: 45%;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.timeline-item:nth-child(odd) {
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
+    padding-right: 60px;
+}
+
+.timeline-item:nth-child(even) {
+    margin-left: auto;
+    margin-right: 0;
+    text-align: left;
+    padding-left: 60px;
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    top: 10px;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:nth-child(odd) .timeline-dot {
+    right: -10px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    left: -10px;
+}
+
+.timeline-item:hover .timeline-dot {
+    transform: scale(1.5);
+    box-shadow: 0 0 20px var(--secondary-color);
+}
+
+.timeline-content {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateY(-5px);
+    border-color: var(--secondary-color);
+}
+
+.timeline-content h3 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content p {
+    color: #a8b2d1;
+    font-size: 0.9rem;
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 4rem 0 2rem;
+    margin-top: 4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    margin-bottom: 2rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+}
+
+.footer-slogan {
+    color: #8a9bb8;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    background: var(--secondary-color);
+    color: var(--dark-bg);
+    border-color: var(--secondary-color);
+}
+
+.copyright {
+    color: #8a9bb8;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* 浮遊要素 */
+.floating-elements {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.float-element {
+    position: absolute;
+    animation: float 20s infinite linear;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+    25% { transform: translateY(-20px) translateX(10px) rotate(90deg); }
+    50% { transform: translateY(10px) translateX(-10px) rotate(180deg); }
+    75% { transform: translateY(-10px) translateX(-20px) rotate(270deg); }
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+        flex-direction: column;
+    }
+    
+    .highlight {
+        font-size: 2.8rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .tech-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .card {
+        padding: 2rem;
+    }
+    
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: calc(100% - 60px);
+        margin-left: 60px !important;
+        text-align: left !important;
+        padding-left: 60px !important;
+        padding-right: 0 !important;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot {
+        left: 20px;
+    }
+    
+    .company-logo {
+        width: 50px; 
+    }
+} 
+
+
+/* --- 採用情報セクション --- */
+.recruitment-section {
+    margin: 6rem 0;
+    padding: 4rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.section-subtitle {
+    color: #a8b2d1;
+    font-size: 1.1rem;
+}
+
+.recruitment-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+
+.recruitment-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0; 
+    transform: translateY(30px); 
+}
+
+
+.to-animate.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.recruitment-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 180, 216, 0.2);
+    border-color: rgba(0, 180, 216, 0.3);
+}
+
+.recruitment-card .card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.recruitment-card .card-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 180, 216, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.recruitment-card h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.recruitment-card .position {
+    color: #8a9bb8;
+    font-size: 0.9rem;
+}
+
+.recruitment-card .card-content {
+    padding: 1.5rem;
+}
+
+.recruitment-list {
+    list-style: none;
+    margin-bottom: 1rem;
+}
+
+.recruitment-list li {
+    padding: 0.5rem 0;
+    color: #a8b2d1;
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.recruitment-list li:last-child {
+    border-bottom: none;
+}
+
+.recruitment-list li i {
+    color: var(--secondary-color);
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+    min-width: 18px;
+}
+
+.recruitment-list .indent {
+    padding-left: 1.5rem;
+    color: #8a9bb8;
+}
+
+.application-info {
+    margin-top: 1rem;
+}
+
+.application-info h4 {
+    color: var(--secondary-color);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.application-info h4 i {
+    margin-right: 0.5rem;
+}
+/* テーマ切替ボタン */
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--secondary-color);
+    color: var(--text-light);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* デフォルト表示：月アイコン表示、太陽アイコン非表示 */
+.theme-toggle .fa-moon {
+    display: block;
+}
+
+.theme-toggle .fa-sun {
+    display: none;
+}
+
+/* ボタンホバー効果 */
+.theme-toggle:hover {
+    background: var(--secondary-color);
+    transform: rotate(30deg) scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+}
+
+/* ライトモード時のボタンスタイル */
+.theme-toggle.light-mode {
+    border-color: var(--primary-color);
+    color: var(--text-dark);
+    background: var(--light-bg);
+}
+
+.theme-toggle.light-mode:hover {
+    background: var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 102, 204, 0.5);
+}
+
+/* クリック時のプレス効果 */
+.theme-toggle:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+/* 内側の光環効果 */
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.theme-toggle:hover::before {
+    opacity: 1;
+}
+
+/* ライトモード時のアイコン表示切り替え */
+body.light-mode .theme-toggle .fa-sun {
+    display: block;
+}
+
+body.light-mode .theme-toggle .fa-moon {
+    display: none;
+}

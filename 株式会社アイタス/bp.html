@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本IT企业主营业务展示</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+        }
+
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #00b4d8;
+            --accent-color: #7209b7;
+            --dark-bg: #0a192f;
+            --light-bg: #f8f9fa;
+            --text-light: #e6f1ff;
+            --text-dark: #172a45;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --transition-speed: 0.4s;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 25, 47, 0.8);
+            transition: all var(--transition-speed);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 3s ease-in-out infinite alternate;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            font-size: 2.2rem;
+        }
+
+        .logo-subtitle {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            margin-left: 10px;
+            opacity: 0.8;
+        }
+
+        @keyframes glow {
+            0% { filter: drop-shadow(0 0 5px rgba(0, 102, 204, 0.5)); }
+            100% { filter: drop-shadow(0 0 15px rgba(0, 180, 216, 0.8)); }
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .main-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .main-nav a:hover::before {
+            transform: translateX(0);
+        }
+
+        .main-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--text-light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--secondary-color);
+            transform: rotate(30deg);
+        }
+
+        .theme-toggle .fa-sun {
+            display: none;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 8rem 0 10rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background: radial-gradient(circle, rgba(0, 180, 216, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .title-part {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #00b4d8, #7209b7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 4.5rem;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            color: #a8b2d1;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            opacity: 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #8a9bb8;
+            margin-top: 0.5rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 6rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            cursor: pointer;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
+            border-color: rgba(0, 180, 216, 0.3);
+        }
+
+        .card.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: #a8b2d1;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .features {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .features li {
+            padding: 0.6rem 0;
+            color: #8a9bb8;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .features li:hover {
+            color: var(--secondary-color);
+            transform: translateX(10px);
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .features li i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .timeline-section {
+            margin: 6rem 0;
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            background: linear-gradient(90deg, #00b4d8, #7209b7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--secondary-color), var(--accent-color));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            width: 45%;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 0;
+            margin-right: auto;
+            text-align: right;
+            padding-right: 60px;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: auto;
+            margin-right: 0;
+            text-align: left;
+            padding-left: 60px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.5);
+            box-shadow: 0 0 20px var(--secondary-color);
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
+        }
+
+        .timeline-content h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            color: #a8b2d1;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .footer-slogan {
+            color: #8a9bb8;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            border-color: var(--secondary-color);
+        }
+
+        .copyright {
+            color: #8a9bb8;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .float-element {
+            position: absolute;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-20px) translateX(10px) rotate(90deg); }
+            50% { transform: translateY(10px) translateX(-10px) rotate(180deg); }
+            75% { transform: translateY(-10px) translateX(-20px) rotate(270deg); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+                flex-direction: column;
+            }
+            
+            .highlight {
+                font-size: 2.8rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .tech-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .card {
+                padding: 2rem;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                text-align: left !important;
+                padding-left: 60px !important;
+                padding-right: 0 !important;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 20px;
+            }
+            
+            .main-nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <div class="floating-elements"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+                <div>
+                    <div>TECHNOVA JP</div>
+                    <div class="logo-subtitle">日本科技前沿</div>
+                </div>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#ai">AI & 机器人</a></li>
+                    <li><a href="#cloud">云计算</a></li>
+                    <li><a href="#5g">5G通信</a></li>
+                    <li><a href="#security">网络安全</a></li>
+                    <li><a href="#industry">智能制造</a></li>
+                    <li><a href="#gaming">娱乐技术</a></li>
+                </ul>
+            </nav>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </button>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-part">日本IT企业</span>
+                    <span class="title-part highlight">核心业务领域</span>
+                </h1>
+                <p class="hero-description">
+                    融合传统工匠精神与现代数字技术，日本IT企业专注于高精度、高可靠性的技术创新，为全球数字化进程提供坚实支撑。
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number" data-target="30">0</div>
+                        <div class="stat-label">年技术积累</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-label">全球合作伙伴</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" data-target="150">0</div>
+                        <div class="stat-label">专利技术</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="tech-grid" id="techGrid"></main>
+        
+        <section class="timeline-section">
+            <h2>技术发展历程</h2>
+            <div class="timeline">
+                <div class="timeline-item" data-year="1995">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>互联网时代开启</h3>
+                        <p>日本企业开始大规模部署互联网基础设施</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2005">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>移动通信革命</h3>
+                        <p>引领3G/4G技术发展，推动移动互联网普及</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2015">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>人工智能崛起</h3>
+                        <p>在机器人技术和AI算法领域取得突破</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2025">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>数字孪生时代</h3>
+                        <p>全面推进工业4.0和智能制造转型</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-microchip"></i>
+                    <span>TECHNOVA JP</span>
+                </div>
+                <p class="footer-slogan">融合传统与创新，塑造数字未来</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <p class="copyright">© 2025 TECHNOVA JP Corporation. 保留所有权利。</p>
+        </footer>
+    </div>
+
+    <script>
+        const techCards = [
+            {
+                id: 'ai',
+                icon: 'fas fa-robot',
+                title: '人工智能与机器人技术',
+                description: '开发先进的AI算法和智能机器人系统，应用于制造业自动化、服务行业和医疗辅助等领域，实现人机协同的智能化解决方案。',
+                features: [
+                    '工业机器人控制系统',
+                    '自然语言处理引擎',
+                    '计算机视觉识别系统',
+                    '自动驾驶技术研发',
+                    '情感计算与智能交互'
+                ],
+                color: '#00b4d8'
+            },
+            {
+                id: 'cloud',
+                icon: 'fas fa-cloud',
+                title: '云计算与数据中心',
+                description: '构建高可靠性、高安全性的云服务平台，为全球企业提供可扩展的IT基础设施，确保数据的安全存储与高效处理。',
+                features: [
+                    '混合云解决方案',
+                    '边缘计算网络',
+                    '数据安全与加密服务',
+                    '灾备与业务连续性保障',
+                    '容器化与微服务架构'
+                ],
+                color: '#0066cc'
+            },
+            {
+                id: '5g',
+                icon: 'fas fa-mobile-alt',
+                title: '移动通信与5G技术',
+                description: '引领5G及未来通信技术发展，推动物联网(IoT)生态系统建设，为智能城市、工业互联网提供高速低延迟的连接基础。',
+                features: [
+                    '5G基站与核心网设备',
+                    '物联网通信模块',
+                    '车联网(V2X)技术',
+                    '卫星通信系统',
+                    '低功耗广域网技术'
+                ],
+                color: '#7209b7'
+            },
+            {
+                id: 'security',
+                icon: 'fas fa-shield-alt',
+                title: '网络安全与数据保护',
+                description: '开发先进的网络安全防护体系，提供全方位的数据保护方案，应对日益复杂的网络威胁，保障数字资产安全。',
+                features: [
+                    '威胁情报与分析平台',
+                    '身份认证与访问控制',
+                    '加密通信技术',
+                    '合规性审计与监控',
+                    '零信任安全架构'
+                ],
+                color: '#4cc9f0'
+            },
+            {
+                id: 'industry',
+                icon: 'fas fa-industry',
+                title: '工业软件与智能制造',
+                description: '为制造业提供数字化解决方案，包括CAD/CAM软件、生产管理系统和数字孪生技术，推动工业4.0转型。',
+                features: [
+                    '产品生命周期管理(PLM)',
+                    '制造执行系统(MES)',
+                    '供应链优化平台',
+                    '数字孪生与仿真',
+                    '预测性维护系统'
+                ],
+                color: '#f72585'
+            },
+            {
+                id: 'gaming',
+                icon: 'fas fa-gamepad',
+                title: '游戏开发与娱乐技术',
+                description: '创造沉浸式的数字娱乐体验，开发游戏引擎、VR/AR应用和互动媒体内容，引领全球娱乐科技发展。',
+                features: [
+                    '游戏引擎开发',
+                    '虚拟现实内容创作',
+                    '增强现实应用开发',
+                    '云游戏服务平台',
+                    '实时渲染技术'
+                ],
+                color: '#4895ef'
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            createFloatingElements();
+            loadTechCards();
+            initAnimations();
+            initThemeToggle();
+            initScrollAnimation();
+            initStatsCounter();
+            initNavigation();
+            
+            // 立即显示一些内容
+            setTimeout(() => {
+                document.querySelectorAll('.title-part').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+                document.querySelector('.hero-description').style.opacity = '1';
+                document.querySelector('.hero-description').style.transform = 'translateY(0)';
+                document.querySelector('.hero-stats').style.opacity = '1';
+            }, 100);
+        });
+
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let mouse = { x: 0, y: 0 };
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = Math.random() * 2 - 1;
+                    this.speedY = Math.random() * 2 - 1;
+                    this.color = `rgba(${Math.random() * 100 + 100}, ${Math.random() * 200 + 50}, ${Math.random() * 255}, ${Math.random() * 0.5 + 0.2})`;
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.x > canvas.width) this.x = 0;
+                    else if (this.x < 0) this.x = canvas.width;
+                    if (this.y > canvas.height) this.y = 0;
+                    else if (this.y < 0) this.y = canvas.height;
+
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        this.speedX += dx * 0.001;
+                        this.speedY += dy * 0.001;
+                    }
+
+                    const speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
+                    if (speed > 2) {
+                        this.speedX = (this.speedX / speed) * 2;
+                        this.speedY = (this.speedY / speed) * 2;
+                    }
+                }
+
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function createParticles() {
+                particles = [];
+                const particleCount = Math.min(100, Math.floor((canvas.width * canvas.height) / 10000));
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function drawConnections() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 100) {
+                            ctx.strokeStyle = `rgba(100, 200, 255, ${0.1 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                
+                drawConnections();
+                requestAnimationFrame(animate);
+            }
+
+            canvas.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                createParticles();
+            });
+
+            resizeCanvas();
+            createParticles();
+            animate();
+        }
+
+        function createFloatingElements() {
+            const container = document.querySelector('.floating-elements');
+            if (!container) return;
+            
+            const shapes = ['circle', 'square', 'triangle', 'hexagon'];
+            const colors = [
+                'rgba(0, 180, 216, 0.3)',
+                'rgba(114, 9, 183, 0.3)',
+                'rgba(0, 102, 204, 0.3)',
+                'rgba(76, 201, 240, 0.3)',
+                'rgba(247, 37, 133, 0.3)'
+            ];
+
+            for (let i = 0; i < 15; i++) {
+                const element = document.createElement('div');
+                element.className = 'float-element';
+                
+                const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                const size = Math.random() * 40 + 10;
+                
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 20}s`;
+                element.style.opacity = Math.random() * 0.5 + 0.1;
+                element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                if (shape === 'circle') {
+                    element.style.borderRadius = '50%';
+                } else if (shape === 'triangle') {
+                    element.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
+                    element.style.backgroundColor = 'transparent';
+                    element.style.borderLeft = `${size/2}px solid transparent`;
+                    element.style.borderRight = `${size/2}px solid transparent`;
+                    element.style.borderBottom = `${size}px solid ${colors[Math.floor(Math.random() * colors.length)]}`;
+                    element.style.width = '0';
+                    element.style.height = '0';
+                } else if (shape === 'hexagon') {
+                    element.style.clipPath = 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)';
+                }
+                
+                container.appendChild(element);
+            }
+        }
+
+        function loadTechCards() {
+            const grid = document.getElementById('techGrid');
+            if (!grid) return;
+            
+            techCards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card active';
+                cardElement.id = card.id;
+                cardElement.style.setProperty('--card-color', card.color);
+                
+                cardElement.innerHTML = `
+                    <div class="card-icon">
+                        <i class="${card.icon}"></i>
+                    </div>
+                    <h3>${card.title}</h3>
+                    <p>${card.description}</p>
+                    <ul class="features">
+                        ${card.features.map(feature => `
+                            <li>
+                                <i class="fas fa-chevron-right"></i>
+                                ${feature}
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+                
+                grid.appendChild(cardElement);
+                
+                cardElement.addEventListener('mouseenter', () => {
+                    const icon = cardElement.querySelector('.card-icon i');
+                    if (icon) {
+                        icon.style.transform = 'scale(1.3) rotate(15deg)';
+                        icon.style.color = card.color;
+                    }
+                });
+                
+                cardElement.addEventListener('mouseleave', () => {
+                    const icon = cardElement.querySelector('.card-icon i');
+                    if (icon) {
+                        icon.style.transform = 'scale(1) rotate(0deg)';
+                        icon.style.color = '';
+                    }
+                });
+            });
+        }
+
+        function initAnimations() {
+            if (typeof gsap === 'undefined') return;
+            
+            gsap.registerPlugin(ScrollTrigger);
+            
+            gsap.utils.toArray('.card').forEach((card, i) => {
+                gsap.fromTo(card, {
+                    opacity: 0,
+                    y: 100
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: i * 0.1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top bottom-=100',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+            
+            gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+                gsap.fromTo(item, {
+                    opacity: 0,
+                    y: 50
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: i * 0.2,
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top bottom-=100',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+        }
+
+        function initThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            if (!themeToggle) return;
+            
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-theme');
+                const isLight = document.body.classList.contains('light-theme');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            });
+            
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        }
+
+        function initScrollAnimation() {
+            const header = document.querySelector('header');
+            if (!header) return;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    header.style.padding = '1rem 0';
+                    header.style.backdropFilter = 'blur(20px)';
+                } else {
+                    header.style.padding = '1.5rem 0';
+                    header.style.backdropFilter = 'blur(10px)';
+                }
+            });
+            
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        function initStatsCounter() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statNumber = entry.target;
+                        const target = parseInt(statNumber.getAttribute('data-target'));
+                        let current = 0;
+                        const increment = target / 50;
+                        const duration = 1500;
+                        const stepTime = duration / 50;
+                        
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            statNumber.textContent = Math.floor(current);
+                        }, stepTime);
+                        
+                        observer.unobserve(statNumber);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statNumbers.forEach(stat => observer.observe(stat));
+        }
+
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.main-nav a');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const sections = document.querySelectorAll('section, .card');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 200)) {
+                        current = section.getAttribute('id') || '';
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
